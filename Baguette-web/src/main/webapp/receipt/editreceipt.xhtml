@@ -1,0 +1,88 @@
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <h:form class="form-horizontal">
+            <hr/><hr/><hr/>
+            <h2>Recept módosítása</h2>  
+            <hr />
+            <div class="form-group" style="clear: both;"> 
+                <label class ="col-md-1 control-label">Kép</label>
+                <h:form>
+                    <div class="col-md-5">
+                        <p:fileUpload dragDropSupport="true" invalidFileMessage="Nem támogatott típus!" invalidSizeMessage="A fájl mérete túl nagy!"
+                                      label="Kiválasztás" fileUploadListener="" mode="advanced"
+                                      update="messages" auto="true" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                        <p:growl id="messages" showDetail="true" />
+                    </div>
+                </h:form>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                <label class ="col-md-1 control-label">Név</label>
+                <div class="col-md-5">
+                    <h:inputText id="name" class="form-control" autocomplete="off" required="true" requiredMessage="A név mező kitöltése kötelező!">
+                        <f:validateLength minimum="1"/>
+                    </h:inputText>
+                    <h:message id="nmessage" for="name" style="color:red"/>
+                </div>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                <label class ="col-md-1 control-label">Hozzávalók</label>
+                <div class="col-md-5">
+                    <p:inputTextarea id="ingred" class="form-control" 
+                     a:placeholder="A hozzávalókat vesszővel elválasztva adja meg!" required="true" requiredMessage="A hozzávalók mező kitöltése kötelező!">
+                        <f:validateLength minimum="1"/>
+                    </p:inputTextarea>
+                    <h:message id="imessage" for="ingred" style="color:red"/>
+                </div>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                <label class ="col-md-1 control-label">Elkészítés</label>
+                <div class="col-md-5">
+                    <p:editor id="desc" widgetVar="editorWidget" required="true" requiredMessage="Az elkészítés mező kitöltése kötelező!">
+                        <f:validateLength minimum="1"/>
+                    </p:editor>
+                     <h:message id="dmessage" for="desc" style="color:red"/>
+                </div>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                <label class ="col-md-1 control-label">Videó</label>
+                <div class="col-md-5">
+                    <h:inputText class="form-control" a:placeholder="Csak Youtube videó lehet!"></h:inputText>
+                </div>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                <label class ="col-md-1 control-label">Kategória</label>
+                <div class="col-md-2">
+                    <p:selectOneMenu id="receipt" style="width:175px">
+                        <f:selectItem itemLabel="Válassz egyet!" itemValue="" />
+                        <f:selectItem itemValue="eloetel" itemLabel="Előétel" />
+                        <f:selectItem itemValue="leves" itemLabel="Leves" />
+                        <f:selectItem itemValue="foetel" itemLabel="Főétel" />
+                        <f:selectItem itemValue="koret" itemLabel="Köret" />
+                        <f:selectItem itemValue="desszert" itemLabel="Desszert" />
+                        <f:selectItem itemValue="ital" itemLabel="Ital" />
+                    </p:selectOneMenu>
+                </div>
+            </div>
+            <br />
+            <div class="form-group" style="clear: both;">
+                    <div class="col-md-offset-1">
+                        <div class="col-md-3">
+                            <p:commandButton id="save" class="btn btn-primary" value="Módosítás" type="submit" update="nmessage dmessage imessage"/> 
+                            <p:commandButton id="cancel" value="Mégse" class="btn btn-warning" action="/index" immediate="true"/>
+                        </div>
+                    </div>
+                </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
