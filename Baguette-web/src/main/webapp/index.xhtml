@@ -1,0 +1,54 @@
+<ui:composition template="/layout/layout.xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <br /><br /><br />
+        <h2>
+            Főoldal
+        </h2>
+        <br />
+        <h:form id="form">
+            <div class="form-group">
+                <h:form>
+                    <h:link outcome="/receipt/addreceipt" class="fa fa-plus btn btn-default" value=" Recept hozzáadása" />                             
+                </h:form>             
+            </div>
+            <div class="form-inline">
+                <h:form>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                        <p:outputLabel for="category" value="Keresés: " />
+                        <p:selectOneRadio id="category" >
+                            <f:selectItem itemValue="minden" itemLabel=" Minden" />
+                            <f:selectItem itemValue="eloetel" itemLabel=" Előétel" />
+                            <f:selectItem itemValue="leves" itemLabel=" Leves" />
+                            <f:selectItem itemValue="foetel" itemLabel=" Főétel" />
+                            <f:selectItem itemValue="koret" itemLabel=" Köret" />
+                            <f:selectItem itemValue="desszert" itemLabel=" Desszert" />
+                            <f:selectItem itemValue="ital" itemLabel=" Ital" />
+                        </p:selectOneRadio>
+                    </h:panelGrid> 
+                    <h:commandButton class="btn btn-default" value="Keresés"/> 
+                </h:form>
+            </div>
+            <p:dataGrid id="receipts" var="receipt"  columns="3" layout="grid"
+                        rows="12" paginator="true"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16" emptyMessage="Nincs találat">
+                <p:panel  style="text-align:center">
+                    <h:panelGrid columns="1" style="width:100%" >
+                        <p:graphicImage  width="200" height="200"/> 
+                    </h:panelGrid>
+                    <br />
+                    <h:panelGrid columns="3" style="width:100%">
+                        <h:commandButton  image="resources/icons/eye.png"/>
+                        <h:commandButton  image="resources/icons/cog.png" />  
+                        <h:commandButton  image="resources/icons/trash.png" />
+                    </h:panelGrid>
+                </p:panel>
+            </p:dataGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
